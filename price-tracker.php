@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       WPCS Price Tracker
  * Plugin URI:        https://hamroreviews.com/
- * Description:       Tracks product prices from a Google Sheet and displays them on product pages.
+ * Description:       Tracks product prices from a Google Sheet and displays them on product pages..
  * Version:           1.6.0
  * Author:            WPCS
  * Author URI:        https://wpcarestudio.com/
