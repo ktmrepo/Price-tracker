@@ -160,9 +160,9 @@ class WPCS_Price_Tracker_Notifications {
                             <td style="padding-left: 20px;" valign="top">
                                 <a href="' . esc_url($product['url']) . '" style="font-size: 18px; font-weight: bold; color: #333; text-decoration: none;">' . esc_html($product['title']) . '</a>
                                 <p style="margin: 5px 0 0 0; font-size: 16px; color: #666;">
-                                    <span style="text-decoration: line-through;">NPR ' . number_format($product['old_price']) . '</span> &rarr; <strong style="color: #2563eb;">NPR ' . number_format($product['new_price']) . '</strong>
+                                    <span style="text-decoration: line-through;">Rs. ' . number_format($product['old_price']) . '</span> &rarr; <strong style="color: #2563eb;">Rs. ' . number_format($product['new_price']) . '</strong>
                                 </p>
-                                <p style="margin: 5px 0 0 0; font-size: 14px; color: #16a34a; font-weight: bold;">You save NPR ' . number_format($saving) . '!</p>
+                                <p style="margin: 5px 0 0 0; font-size: 14px; color: #16a34a; font-weight: bold;">You save Rs. ' . number_format($saving) . '!</p>
                             </td>
                         </tr>
                     </table>

@@ -80,7 +80,7 @@ class WPCS_Price_Tracker_Dashboard {
                             <p class="wpcs-stat-label">Products with Price Drops</p>
                         </div>
                         <div class="wpcs-stat-card">
-                            <p class="wpcs-stat-value">NPR <?php echo number_format($overview_stats['biggest_saving_amount']); ?></p>
+                            <p class="wpcs-stat-value">Rs. <?php echo number_format($overview_stats['biggest_saving_amount']); ?></p>
                             <p class="wpcs-stat-label">Biggest Potential Saving on "<?php echo esc_html($overview_stats['biggest_saving_item']); ?>"</p>
                         </div>
                     </div>
@@ -113,7 +113,7 @@ class WPCS_Price_Tracker_Dashboard {
                                     <div class="wpcs-dashboard-item-details">
                                         <a href="<?php echo esc_url( get_permalink( $item->post_id ) ); ?>" class="wpcs-dashboard-item-title"><?php echo esc_html( $item->post_title ); ?></a>
                                         <p class="wpcs-dashboard-item-price">
-                                            NPR <?php echo number_format($item->current_price); ?>
+                                            Rs. <?php echo number_format($item->current_price); ?>
                                             <?php if ( $item->price_change < 0 ) : ?>
                                                 <span class="wpcs-price-drop"><?php echo abs(round($item->price_change)); ?>%</span>
                                             <?php elseif ( $item->price_change > 0 ) : ?>

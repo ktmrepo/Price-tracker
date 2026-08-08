@@ -358,6 +358,7 @@ class WPCS_Price_Tracker_Public {
             <div class="wpcs-header-content">
                 ' . $cat_html . '
                 <h1 class="wpcs-header-title">' . esc_html($data['post_title']) . '</h1>
+                ' . $this->render_header_price_row($data['stats']) . '
                 <a href="' . esc_url($data['primary_url']) . '" class="wpcs-header-link">View on ' . esc_html($data['product_data']['primary_store']) . ' &rarr;</a>
             </div>
             <button class="wpcs-watchlist-icon-button ' . esc_attr($active_class) . '" title="Add to Watchlist" data-product-slug="' . esc_attr($data['product_slug']) . '">
@@ -366,50 +367,137 @@ class WPCS_Price_Tracker_Public {
         </div>';
     }
 
-    private function render_store_list($data) {
-        $html = '<div class="wpcs-card"><h2 class="wpcs-section-title">Available Platforms</h2><div class="wpcs-platforms-grid">';
-        
-        $index = 0; 
-        foreach($data['product_data']['stores'] as $store) {
-            $is_primary = ($store['StoreName'] === $data['product_data']['primary_store']);
-            $card_class = 'wpcs-platform-card' . ($is_primary ? ' primary' : '');
-            $logo_html = !empty($store['StoreLogoURL']) ? '<img src="' . esc_url($store['StoreLogoURL']) . '" alt="' . esc_attr($store['StoreName']) . '" class="wpcs-platform-logo">' : '';
-            
-            $price = (float)$store['CurrentPrice'];
-            
-            $btn_text = 'Buy Now';
-            $btn_link = esc_url($store['ProductURL']);
-            $btn_class = 'wpcs-platform-buy-button';
-            $target_attr = 'target="_blank" rel="noopener nofollow"';
+    /**
+     * The price + deal-status badge row shown under the header title.
+     */
+    private function render_header_price_row($stats) {
+        if (empty($stats['current']) || $stats['current'] <= 0) {
+            return '';
+        }
 
-            if ($index < 3 && $price <= 0) {
+        $price_display = 'Rs. ' . number_format($stats['current']);
+        $badge_html = '<span class="wpcs-header-badge ' . esc_attr($stats['status_class']) . '">' . esc_html($stats['status_text']) . '</span>';
+
+        $subtitle = '';
+        if ($stats['highest'] > $stats['lowest']) {
+            $diff = $stats['current'] - $stats['lowest'];
+            if ($diff <= 0) {
+                $subtitle = 'This is the lowest price recorded so far.';
+            } else {
+                $subtitle = 'Rs. ' . number_format($diff) . ' above its lowest recorded price.';
+            }
+        }
+        $subtitle_html = $subtitle ? '<p class="wpcs-header-price-subtitle">' . esc_html($subtitle) . '</p>' : '';
+
+        return '
+        <div class="wpcs-header-price-row">
+            <span class="wpcs-header-price">' . esc_html($price_display) . '</span>
+            ' . $badge_html . '
+        </div>
+        ' . $subtitle_html;
+    }
+
+    private function render_store_list($data) {
+        $stores = $this->sort_stores_for_display($data['product_data']['stores'], $data['product_data']['primary_store']);
+        $best_price_store = $this->find_best_price_store($stores);
+
+        $html = '<div class="wpcs-card"><h2 class="wpcs-section-title">Available Platforms</h2><div class="wpcs-platforms-grid">';
+
+        foreach ($stores as $store) {
+            $price = (float) $store['CurrentPrice'];
+            $in_stock = $price > 0;
+            $is_best_price = $in_stock && $best_price_store !== null && $store['StoreName'] === $best_price_store;
+
+            $card_class = 'wpcs-platform-card';
+            if ($is_best_price) $card_class .= ' best-price';
+            if (!$in_stock) $card_class .= ' out-of-stock';
+
+            $logo_html = !empty($store['StoreLogoURL']) ? '<img src="' . esc_url($store['StoreLogoURL']) . '" alt="' . esc_attr($store['StoreName']) . '" class="wpcs-platform-logo">' : '';
+            $badge_html = $is_best_price ? '<span class="wpcs-platform-badge">Best Price</span>' : '';
+
+            if ($in_stock) {
+                $tag = 'a';
+                $link_attrs = ' href="' . esc_url($store['ProductURL']) . '" target="_blank" rel="noopener nofollow"';
+                $btn_text = 'Buy Now';
+                $btn_class = 'wpcs-platform-buy-button';
+                $price_display = 'Rs. ' . number_format($price);
+            } else {
+                $tag = 'div';
+                $link_attrs = '';
                 $btn_text = 'Out of Stock';
-                $btn_link = '#';
-                $btn_class .= ' is-disabled';
-                $target_attr = ''; 
+                $btn_class = 'wpcs-platform-buy-button is-disabled';
+                $price_display = 'Rs. xxxxx';
             }
 
-            $price_display = ($price > 0) ? 'NPR ' . number_format($price) : '';
-
             $html .= '
-            <a href="' . $btn_link . '" ' . $target_attr . ' class="' . $card_class . '">
+            <' . $tag . ' class="' . $card_class . '"' . $link_attrs . '>
+                ' . $badge_html . '
                 <div class="wpcs-platform-logo-container">' . $logo_html . '</div>
                 <div class="wpcs-platform-details">
                     <h3 class="wpcs-platform-name">' . esc_html($store['StoreName']) . '</h3>
-                    <p class="wpcs-platform-price">' . esc_html($price_display) . '</p>
+                    <p class="wpcs-platform-price' . (!$in_stock ? ' unavailable' : '') . '">' . esc_html($price_display) . '</p>
                 </div>
                 <div class="' . $btn_class . '">' . $btn_text . '</div>
-            </a>';
-            
-            $index++;
+            </' . $tag . '>';
         }
         $html .= '</div></div>';
         return $html;
     }
 
+    /**
+     * Primary/default store (from the sheet) always leads; the rest are
+     * sorted cheapest-first, with out-of-stock stores pushed to the end.
+     */
+    private function sort_stores_for_display($stores, $primary_store_name) {
+        $primary = null;
+        $others = [];
+        foreach ($stores as $store) {
+            if ($primary === null && $store['StoreName'] === $primary_store_name) {
+                $primary = $store;
+            } else {
+                $others[] = $store;
+            }
+        }
+
+        usort($others, function($a, $b) {
+            $price_a = (float) $a['CurrentPrice'];
+            $price_b = (float) $b['CurrentPrice'];
+            $a_in_stock = $price_a > 0;
+            $b_in_stock = $price_b > 0;
+            if ($a_in_stock !== $b_in_stock) {
+                return $a_in_stock ? -1 : 1;
+            }
+            if (!$a_in_stock) return 0;
+            return $price_a <=> $price_b;
+        });
+
+        return $primary ? array_merge([$primary], $others) : $others;
+    }
+
+    /**
+     * Cheapest in-stock store, only when there's actually something to compare against.
+     */
+    private function find_best_price_store($stores) {
+        $best_name = null;
+        $best_price = null;
+        $priced_count = 0;
+
+        foreach ($stores as $store) {
+            $price = (float) $store['CurrentPrice'];
+            if ($price <= 0) continue;
+            $priced_count++;
+            if ($best_price === null || $price < $best_price) {
+                $best_price = $price;
+                $best_name = $store['StoreName'];
+            }
+        }
+
+        return $priced_count >= 2 ? $best_name : null;
+    }
+
     private function render_price_meter($data) {
         $s = $data['stats'];
-        $current_display = ($s['current'] > 0) ? 'NPR ' . number_format($s['current']) : 'N/A';
+        $current_display = ($s['current'] > 0) ? 'Rs. ' . number_format($s['current']) : 'N/A';
 
         return '
         <div class="wpcs-card wpcs-analysis-card">
@@ -433,9 +521,9 @@ class WPCS_Price_Tracker_Public {
 
     private function render_price_stats($data) {
         $s = $data['stats'];
-        $high_display = ($s['highest'] > 0) ? 'NPR ' . number_format($s['highest']) : 'N/A';
-        $low_display = ($s['lowest'] > 0) ? 'NPR ' . number_format($s['lowest']) : 'N/A';
-        $curr_display = ($s['current'] > 0) ? 'NPR ' . number_format($s['current']) : 'N/A';
+        $high_display = ($s['highest'] > 0) ? 'Rs. ' . number_format($s['highest']) : 'N/A';
+        $low_display = ($s['lowest'] > 0) ? 'Rs. ' . number_format($s['lowest']) : 'N/A';
+        $curr_display = ($s['current'] > 0) ? 'Rs. ' . number_format($s['current']) : 'N/A';
 
         return '
         <div class="wpcs-card wpcs-stats-column">
@@ -517,7 +605,7 @@ class WPCS_Price_Tracker_Public {
             $r_data = $this->get_view_data(get_the_ID());
             $price_text = 'View Price';
             if($r_data && $r_data['stats']['current'] > 0) {
-                $price_text = 'NPR ' . number_format($r_data['stats']['current']);
+                $price_text = 'Rs. ' . number_format($r_data['stats']['current']);
             }
 
             $html .= '
@@ -709,7 +797,7 @@ class WPCS_Price_Tracker_Public {
                                             if (label) label += ': ';
                                             if (context.parsed.y !== null) {
                                                 const formattedPrice = new Intl.NumberFormat('en-US').format(context.parsed.y);
-                                                label += 'NPR ' + formattedPrice;
+                                                label += 'Rs. ' + formattedPrice;
                                             }
                                             return label;
                                         }
@@ -717,7 +805,7 @@ class WPCS_Price_Tracker_Public {
                                 }
                             },
                             scales: {
-                                y: { ticks: { callback: function(value) { return 'NPR ' + (value / 1000) + 'k'; } } },
+                                y: { ticks: { callback: function(value) { return 'Rs. ' + (value / 1000) + 'k'; } } },
                                 x: { grid: { display: false } }
                             }
                         }
