@@ -1,0 +1,1098 @@
+/**
+ * Public-facing CSS for WPCS Price Tracker
+ *
+ * @since 1.9.5
+ */
+
+/* --- General & Fonts --- */
+.wpcs-container {
+  font-family: "Inter", sans-serif;
+  margin: 32px auto;
+  color: #1f2937;
+}
+
+.wpcs-container h1,
+.wpcs-container h2,
+.wpcs-container h3,
+.wpcs-container p,
+.wpcs-container a,
+.wpcs-container span {
+  font-family: "Inter", sans-serif;
+}
+
+/* --- Card Styles --- */
+.wpcs-card {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+/* --- Grid Layouts --- */
+.wpcs-grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .wpcs-grid-cols-sm-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* --- Header Section --- */
+.wpcs-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .wpcs-header {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+.wpcs-header-img-container {
+  flex-shrink: 0;
+}
+.wpcs-header-img {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+@media (min-width: 768px) {
+  .wpcs-header-img {
+    width: 160px;
+    height: 160px;
+  }
+}
+.wpcs-header-content {
+  flex: 1 1 0%;
+  width: 100%;
+}
+.wpcs-header-title {
+  font-size: 44px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+.wpcs-header-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 8px;
+  display: inline-block;
+}
+.wpcs-header-link:hover {
+  text-decoration: underline;
+}
+
+/* Category Badges (NEW) */
+.wpcs-category-badges {
+    margin-bottom: 12px;
+}
+.wpcs-cat-badge {
+    display: inline-block;
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    margin-right: 8px;
+    transition: background-color 0.2s;
+}
+.wpcs-cat-badge:hover {
+    background-color: #bfdbfe;
+}
+
+/* --- Price Stats Section --- */
+.wpcs-price-stats-card .wpcs-section-title {
+  margin-bottom: 16px;
+}
+.wpcs-price-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .wpcs-price-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.wpcs-stats-item {
+  padding: 16px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid;
+}
+.wpcs-stats-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+.wpcs-stats-value {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 4px 0 0 0;
+}
+.wpcs-stats-item.highest {
+  color: #b91c1c;
+  border-color: #fecaca;
+  background-color: #fef2f2;
+}
+.wpcs-stats-item.lowest {
+  color: #166534;
+  border-color: #bbf7d0;
+  background-color: #f0fdf4;
+}
+.wpcs-stats-item.current {
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+  background-color: #eff6ff;
+}
+.wpcs-stats-item .wpcs-stats-label {
+  color: #4b5563;
+}
+
+/* --- Platforms Section --- */
+.wpcs-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.wpcs-platforms-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .wpcs-platforms-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wpcs-platforms-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.wpcs-platform-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.wpcs-platform-card:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transform: translateY(-4px);
+  border-color: #d1d5db;
+}
+
+.wpcs-platform-card.primary {
+  box-shadow: 0 0 0 2px #dbeafe;
+}
+.wpcs-platform-card.primary:hover {
+  box-shadow: 0 0 0 3px #bfdbfe;
+}
+
+.wpcs-platform-logo-container {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #f3f4f6;
+}
+
+.wpcs-platform-logo {
+  max-width: 40px;
+  max-height: 40px;
+  object-fit: contain;
+}
+
+.wpcs-platform-details {
+  flex-grow: 1;
+}
+
+.wpcs-platform-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.wpcs-platform-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2563eb;
+  margin: 2px 0 0 0;
+}
+
+.wpcs-platform-buy-button {
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #1d4ed8;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+}
+.wpcs-platform-card:hover .wpcs-platform-buy-button {
+  background-color: #1d4ed8;
+}
+
+/* Out of Stock State */
+.wpcs-platform-buy-button.is-disabled {
+    background-color: #9ca3af; /* Gray-400 */
+    border-color: #9ca3af;
+    cursor: not-allowed;
+    pointer-events: none; 
+}
+
+/* --- Analysis Meter --- */
+.wpcs-analysis-title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+.wpcs-analysis-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  margin-top: 4px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.wpcs-gauge-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.wpcs-gauge-container {
+  width: 300px;
+  height: 150px;
+  position: relative;
+}
+.wpcs-gauge-arc {
+  width: 300px;
+  height: 150px;
+  border-radius: 300px 300px 0 0;
+  background: conic-gradient(
+    from -90deg at 50% 100%,
+    #16a34a 0deg 60deg,
+    #fbbf24 60deg 120deg,
+    #dc2626 120deg 180deg
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.wpcs-gauge-cover {
+  width: 240px;
+  height: 120px;
+  border-radius: 240px 240px 0 0;
+  background: #fff;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+.wpcs-gauge-needle {
+  width: 8px;
+  height: 125px;
+  background: #1f2937;
+  position: absolute;
+  left: calc(50% - 4px);
+  bottom: 0;
+  transform-origin: bottom center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease-out;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+.wpcs-gauge-needle-knob {
+  width: 20px;
+  height: 20px;
+  background: #1f2937;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.wpcs-gauge-price-display {
+  text-align: center;
+  margin-top: 16px;
+}
+.wpcs-gauge-value {
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+.wpcs-gauge-status {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 20px 0 0 0;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+.wpcs-gauge-description {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 8px 0 0 0;
+}
+.status-lowest {
+  color: #15803d;
+  background-color: #dcfce7;
+}
+.status-highest {
+  color: #b91c1c;
+  background-color: #fee2e2;
+}
+.status-average {
+  color: #a16207;
+  background-color: #fef9c3;
+}
+
+/* --- Chart --- */
+.wpcs-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.wpcs-chart-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.wpcs-chart-filters {
+  display: flex;
+  gap: 8px;
+  background-color: #f3f4f6;
+  padding: 4px;
+  border-radius: 8px;
+}
+.wpcs-chart-filter-btn {
+  border: none;
+  background-color: transparent;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.wpcs-chart-filter-btn:hover {
+  background-color: #e5e7eb;
+}
+.wpcs-chart-filter-btn.active {
+  background-color: #fff;
+  color: #111827;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+.wpcs-chart-container {
+  position: relative;
+  height: 300px;
+}
+
+/* --- Watchlist Icon Button --- */
+.wpcs-watchlist-icon-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: #6b7280;
+}
+.wpcs-watchlist-icon-button:hover {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+.wpcs-watchlist-icon-button svg {
+  width: 20px;
+  height: 20px;
+  transition: all 0.2s ease-in-out;
+  fill: none;
+  stroke: currentColor;
+}
+.wpcs-watchlist-icon-button.active {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+.wpcs-watchlist-icon-button.active svg {
+  fill: currentColor;
+}
+
+/* --- Login Modal --- */
+.wpcs-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.wpcs-modal-content {
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+.wpcs-modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #9ca3af;
+  cursor: pointer;
+}
+.wpcs-modal-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 8px 0;
+}
+.wpcs-modal-content p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0 0 24px 0;
+}
+.wpcs-modal-login-btn {
+  display: inline-block;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* --- Dashboard --- */
+.wpcs-dashboard-wrapper {
+  max-width: 1100px;
+  margin: 48px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.wpcs-dashboard-nav {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 48px;
+}
+.wpcs-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.wpcs-user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+.wpcs-user-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+.wpcs-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.wpcs-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4b5563;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.wpcs-nav-link:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+.wpcs-nav-link.active {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+.wpcs-nav-link svg {
+  width: 20px;
+  height: 20px;
+}
+.wpcs-logout-btn {
+  display: flex;
+  width: 100%;
+  margin-top: 24px;
+}
+.wpcs-dashboard-content .wpcs-dashboard-panel {
+  display: none;
+}
+.wpcs-dashboard-content .wpcs-dashboard-panel.active {
+  display: block;
+}
+
+.wpcs-dashboard-header {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.wpcs-dashboard-list {
+  display: grid;
+  gap: 16px;
+}
+.wpcs-dashboard-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px 40px;
+  align-items: center;
+  gap: 16px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.wpcs-dashboard-item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.wpcs-dashboard-item-details {
+  flex-grow: 1;
+}
+.wpcs-dashboard-item-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  text-decoration: none;
+}
+.wpcs-dashboard-item-title:hover {
+  text-decoration: underline;
+  color: #2563eb;
+}
+.wpcs-dashboard-item-price {
+  font-size: 18px;
+  font-weight: 500;
+  color: #4b5563;
+  margin: 4px 0 0 0;
+}
+.wpcs-dashboard-item-timestamp {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 4px 0 0 0;
+}
+.wpcs-price-drop,
+.wpcs-price-increase {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px 4px 4px;
+  border-radius: 9999px;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.wpcs-price-drop {
+  color: #16a34a;
+  background-color: #f0fdf4;
+}
+.wpcs-price-increase {
+  color: #dc2626;
+  background-color: #fef2f2;
+}
+.wpcs-price-drop::before,
+.wpcs-price-increase::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.wpcs-price-drop::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2316a34a'%3E%3Cpath fill-rule='evenodd' d='M10 3a.75.75 0 01.75.75v10.638l4.22-4.22a.75.75 0 111.06 1.06l-5.25 5.25a.75.75 0 01-1.06 0l-5.25-5.25a.75.75 0 111.06-1.06l4.22 4.22V3.75A.75.75 0 0110 3z' clip-rule='evenodd' transform='rotate(180 10 10)'/%3E%3C/svg%3E");
+}
+.wpcs-price-increase::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23dc2626'%3E%3Cpath fill-rule='evenodd' d='M10 17a.75.75 0 01-.75-.75V5.612L5.03 9.83a.75.75 0 01-1.06-1.06l5.25-5.25a.75.75 0 011.06 0l5.25 5.25a.75.75 0 11-1.06 1.06L10.75 5.612V16.25A.75.75 0 0110 17z' clip-rule='evenodd' transform='rotate(180 10 10)'/%3E%3C/svg%3E");
+}
+.wpcs-dashboard-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  color: #6b7280;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.wpcs-dashboard-remove-btn:hover {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+.wpcs-dashboard-remove-btn svg {
+  width: 20px;
+  height: 20px;
+}
+.wpcs-dashboard-empty {
+  text-align: center;
+  background-color: #f9fafb;
+  padding: 48px;
+  border-radius: 12px;
+  border: 1px dashed #e5e7eb;
+}
+.wpcs-dashboard-empty p {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+.wpcs-dashboard-empty span {
+  font-size: 16px;
+  color: #6b7280;
+  margin-top: 4px;
+  display: block;
+}
+.wpcs-account-form {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.wpcs-form-group {
+  margin-bottom: 20px;
+}
+.wpcs-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.wpcs-form-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
+}
+.wpcs-form-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #dbeafe;
+}
+.wpcs-form-button {
+  display: inline-block;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.wpcs-form-button:hover {
+  background-color: #1d4ed8;
+}
+.wpcs-dashboard-login {
+  text-align: center;
+  background-color: #fff;
+  padding: 48px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.wpcs-dashboard-login p {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111827;
+  margin: 0 0 16px 0;
+}
+.wpcs-dashboard-login-btn {
+  display: inline-block;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+/* --- Dashboard Toolbar & Sort --- */
+.wpcs-dashboard-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.wpcs-sort-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.wpcs-sort-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+}
+.wpcs-sort-select {
+  padding: 8px 32px 8px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%236b7280' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+.wpcs-sort-select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #dbeafe;
+}
+
+/* --- Notification Panel --- */
+.wpcs-dashboard-section {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 24px;
+}
+.wpcs-section-header {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 16px 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.wpcs-notification-options {
+  display: grid;
+  gap: 16px;
+}
+.wpcs-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.wpcs-radio-label input {
+  width: 18px;
+  height: 18px;
+}
+.wpcs-radio-label:has(input:checked) {
+  background-color: #eef2ff;
+  border-color: #818cf8;
+}
+.wpcs-radio-details {
+  text-align: left;
+}
+.wpcs-radio-title {
+  font-weight: 600;
+  color: #111827;
+}
+.wpcs-radio-description {
+  font-size: 14px;
+  color: #6b7280;
+}
+.wpcs-target-price-list {
+  display: grid;
+  gap: 12px;
+}
+.wpcs-target-price-item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  gap: 16px;
+}
+.wpcs-target-price-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.wpcs-target-price-title {
+  font-weight: 500;
+}
+.wpcs-target-price-input {
+  width: 120px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+.wpcs-prefs-saved-msg {
+  margin-left: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #16a34a;
+}
+
+/* --- Dashboard Overview --- */
+.wpcs-overview-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+.wpcs-stat-card {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+.wpcs-stat-card .wpcs-stat-value {
+  font-size: 30px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+.wpcs-stat-card .wpcs-stat-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0;
+  line-height: normal;
+}
+
+/* --- Sparkline --- */
+.wpcs-sparkline-container {
+  width: 100px;
+  height: 40px;
+}
+
+/* --- Delete Account --- */
+.wpcs-delete-account-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #fee2e2;
+}
+.wpcs-delete-account-section h2 {
+  color: #dc2626;
+}
+.wpcs-delete-account-section p {
+  color: #ef4444;
+  font-size: 14px;
+}
+.wpcs-delete-button {
+  display: inline-block;
+  background-color: #dc2626;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.wpcs-delete-button:hover {
+  background-color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+  .wpcs-dashboard-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .wpcs-dashboard-nav {
+    position: static;
+  }
+  .wpcs-dashboard-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* --- NEW: Avatar Uploader --- */
+.wpcs-avatar-uploader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.wpcs-user-avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+/* --- NEW Styles for Modern Product Page Sections --- */
+.wpcs-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.wpcs-analysis-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .wpcs-analysis-stats-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+.wpcs-analysis-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wpcs-stats-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* --- Related Products Grid (NEW) --- */
+.wpcs-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 10px;
+}
+.wpcs-related-card {
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+.wpcs-related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-color: #bfdbfe;
+}
+.wpcs-related-img-wrap {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+}
+.wpcs-related-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.wpcs-related-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.wpcs-related-price {
+    font-size: 14px;
+    color: #2563eb;
+    font-weight: 700;
+    margin-top: auto;
+}
